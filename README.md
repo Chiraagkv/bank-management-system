@@ -1,5 +1,5 @@
 # bank-management-system
-school project using sql and python
+school project using SQL and python
 
 ```bash
 pip install streamlit
