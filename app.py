@@ -14,3 +14,5 @@ if st.button("User Log-in"):
     switch_page("usr_login")
 if st.button("Employee Log-in"):
     switch_page("emp_login")
+if st.button("New User Sign-up"):
+    switch_page("usr_signup")
