@@ -1,4 +1,5 @@
 use bank
+
 CREATE TABLE employees(
     employee_id INTEGER AUTO_INCREMENT,
     employee_name VARCHAR(80) NOT NULL,
@@ -45,6 +46,7 @@ CREATE TABLE investments(
     scheme_id INTEGER NOT NULL,
     start_date DATE NOT NULL,
     amount DECIMAL(12, 2) NOT NULL,
+    status enum('PENDING', 'ACTIVE', 'DONE'),
     CONSTRAINT pk_inv PRIMARY KEY(investment_id),
     CONSTRAINT fk_inv1 FOREIGN KEY(user_id) REFERENCES users(user_id),
     CONSTRAINT fk_inv2 FOREIGN KEY(scheme_id) REFERENCES schemes(scheme_id)
@@ -52,7 +54,7 @@ CREATE TABLE investments(
 
 CREATE TABLE transactions(
     transaction_id INTEGER AUTO_INCREMENT,
-    investment_id INTEGER,
+    investment_id INTEGER NOT NULL,
     transaction_datetime DATETIME NOT NULL,
     transaction_amount DECIMAL(12, 2) NOT NULL,
     CONSTRAINT pk_tran PRIMARY KEY(transaction_id),
@@ -71,5 +73,6 @@ CREATE TABLE payments(
 );
 
 INSERT INTO schemes VALUES(1, 'EasyLoan', 'loan', 'home', 1.23, 3);
+INSERT INTO schemes VALUES(2, 'EasyDeposit', 'deposit', 'SB', 1.23, 5);
 INSERT INTO employees VALUES(1, 'ABC', 'bank', '1997-05-29', 'm', 'nowhere', '2003-04-04', 123, 'ADMIN');
-INSERT INTO users VALUES(1, 'chiraag', 'password', '2007-05-29', 'm', 'everywhere', 'chiraagkv@gmail.com', '917975113319');
+INSERT INTO users VALUES(1, 'chiraag', 'password', '2007-05-29', 'm', 'everywhere', 'chiraagkv@gmail.com', '917975113319', NULL, NULL);
