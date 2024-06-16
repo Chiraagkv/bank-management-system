@@ -6,7 +6,7 @@ def create_connection(host_name, user_name, user_password):
     connection = None
     try:
         connection = mysql.connector.connect(
-            host=host_name, user=user_name, passwd=user_password
+            host=host_name, user=user_name, passwd=user_password, auth_plugin='mysql_native_password'
         )
         print("Connection to MySQL DB successful")
     except Error as e:
@@ -15,7 +15,7 @@ def create_connection(host_name, user_name, user_password):
     return connection
 
 
-connection = create_connection("localhost", "root", "<password>*")
+connection = create_connection("localhost", "root", "chinchira9*")
 cursor = connection.cursor()
 cursor.execute("use bank")
 

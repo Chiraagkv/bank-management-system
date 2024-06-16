@@ -36,6 +36,7 @@ CREATE TABLE users(
     primary_contact_number CHAR(12) NOT NULL,
     secondary_contact_number CHAR(12),
     credit_score DECIMAL(5, 2),
+    pin INT(4)
     CONSTRAINT check_gender_usr CHECK(gender='m' OR gender='f' OR gender='M' OR gender='F'),
     CONSTRAINT pk_usr PRIMARY KEY(user_id)
 );
@@ -75,4 +76,4 @@ CREATE TABLE payments(
 INSERT INTO schemes VALUES(1, 'EasyLoan', 'loan', 'home', 1.23, 3);
 INSERT INTO schemes VALUES(2, 'EasyDeposit', 'deposit', 'SB', 1.23, 5);
 INSERT INTO employees VALUES(1, 'ABC', 'bank', '1997-05-29', 'm', 'nowhere', '2003-04-04', 123, 'ADMIN');
-INSERT INTO users VALUES(1, 'chiraag', 'password', '2007-05-29', 'm', 'everywhere', 'chiraagkv@gmail.com', '917975113319', NULL, NULL);
+INSERT INTO users VALUES(1, 'chiraag', 'password', '2007-05-29', 'm', 'everywhere', 'chiraagkv@gmail.com', '917975113319', NULL, NULL, 1234);

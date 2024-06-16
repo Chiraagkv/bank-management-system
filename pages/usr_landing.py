@@ -2,7 +2,7 @@ import streamlit as st
 from utils import *
 import pandas as pd
 
-email = open("D:\\bank\\creds.txt").read()
+email = open("./creds.txt").read()
 st.set_page_config(initial_sidebar_state="collapsed")
 no_sidebar_style = """
     <style>
@@ -68,8 +68,9 @@ elif option == "Take a Loan":
     amount = st.text_input("Enter principal amount")
     if amount:
         info = display_everything(email)
+        print(info)
         pin = st.text_input("Enter account pin", type="password")
-        if info[-1] == int(pin):
+        if int(info[-1]) == int(pin):
             add_investment(opt, email, float(amount))
             st.write("Loan has been requested. We will look into it soon.")
         elif pin and int(pin) != info[-1]:
