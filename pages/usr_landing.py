@@ -116,3 +116,7 @@ elif option == "Make transactions":
                     st.write("Balance insufficient")
             else:
                 st.write("Wrong password")
+elif option == "Check Your Plans":
+    invs = show_investments(email)
+    st.write(invs)
+

@@ -36,7 +36,7 @@ CREATE TABLE users(
     primary_contact_number CHAR(12) NOT NULL,
     secondary_contact_number CHAR(12),
     credit_score DECIMAL(5, 2),
-    pin INT(4)
+    pin INT(4),
     CONSTRAINT check_gender_usr CHECK(gender='m' OR gender='f' OR gender='M' OR gender='F'),
     CONSTRAINT pk_usr PRIMARY KEY(user_id)
 );

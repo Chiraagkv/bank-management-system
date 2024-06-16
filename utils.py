@@ -6,7 +6,10 @@ def create_connection(host_name, user_name, user_password):
     connection = None
     try:
         connection = mysql.connector.connect(
-            host=host_name, user=user_name, passwd=user_password, auth_plugin='mysql_native_password'
+            host=host_name,
+            user=user_name,
+            passwd=user_password,
+            auth_plugin="mysql_native_password",
         )
         print("Connection to MySQL DB successful")
     except Error as e:
@@ -116,3 +119,10 @@ def change_balance(acc_id, amt):
         )
         connection.commit()
         return "good"
+
+
+def show_investments(email):
+    cursor.execute(f"SELECT user_id from users where email = '{email}'")
+    usr_id = int(cursor.fetchone()[0])
+    cursor.execute(f"SELECT * from investments where user_id= {usr_id}")
+    return cursor.fetchall(), usr_id
