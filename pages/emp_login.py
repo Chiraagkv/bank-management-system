@@ -15,7 +15,7 @@ id = st.text_input("Employee ID", placeholder="Employee ID")
 password = st.text_input("Password", placeholder="password", type="password")
 if st.button("Log-in", type="primary"):
     if check_employee_password(id, password):
-        open("D:\\bank\\creds.txt", "w").write(id)
+        open("./creds.txt", "w").write(id)
         switch_page("employee_landing")
 
     else:

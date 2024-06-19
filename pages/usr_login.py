@@ -15,7 +15,7 @@ email = st.text_input("Email Address", placeholder="your.name@mail.com")
 password = st.text_input("Password", placeholder="password", type="password")
 if st.button("Log-in", type="primary"):
     if check_user_password(email, password):
-        open("D:\\bank\\creds.txt", "w").write(email)
+        open("./creds.txt", "w").write(email)
         switch_page("usr_landing")
 
     else:
