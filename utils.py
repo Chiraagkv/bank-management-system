@@ -18,7 +18,7 @@ def create_connection(host_name, user_name, user_password):
     return connection
 
 
-connection = create_connection("localhost", "root", "chinchira9*")
+connection = create_connection("localhost", "root", "xxxxxxx")
 cursor = connection.cursor()
 cursor.execute("use bank")
 
