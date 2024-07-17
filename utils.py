@@ -2,6 +2,7 @@ from datetime import date
 import mysql.connector
 from mysql.connector import Error
 
+usr, pwd = open("usr_pwd.txt").read().split(" ")
 
 def create_connection(host_name, user_name, user_password):
     connection = None
@@ -19,7 +20,7 @@ def create_connection(host_name, user_name, user_password):
     return connection
 
 
-connection = create_connection("localhost", "root", "xxxxxxx")
+connection = create_connection("localhost", usr, pwd)
 cursor = connection.cursor()
 cursor.execute("use bank")
 
