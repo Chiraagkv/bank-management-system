@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_extras.switch_page_button import switch_page
+from streamlit_extras.switch_page_button import switch_page
 from utils import *
 
 st.set_page_config(initial_sidebar_state="collapsed")
