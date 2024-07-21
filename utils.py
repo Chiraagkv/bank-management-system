@@ -1,3 +1,4 @@
+from datetime import date
 import mysql.connector
 from mysql.connector import Error
 
@@ -120,9 +121,35 @@ def change_balance(acc_id, amt):
         connection.commit()
         return "good"
 
-
 def show_investments(email):
     cursor.execute(f"SELECT user_id from users where email = '{email}'")
     usr_id = int(cursor.fetchone()[0])
     cursor.execute(f"SELECT * from investments where user_id= {usr_id}")
     return cursor.fetchall(), usr_id
+
+def find_days(d1, d2):
+    a = d1[-1] - d2[-1]
+    b = d1[1] - d2[1]
+    c = d1[0] - d2[0]
+    return a + 12*b + 365*c
+
+def find_full_savings(email):
+    cursor.execute(f"SELECT user_id from users where email = '{email}'")
+    usr_id = int(cursor.fetchone()[0])
+    cursor.execute(f"SELECT amount, schemes.scheme_id, start_date from investments join schemes on investments.scheme_id=schemes.scheme_id where user_id={usr_id} and scheme_type='deposit'")
+    invs = cursor.fetchall()
+    tot = 0
+    for i in invs:
+        scheme_id = int(i[1])
+        cursor.execute(f"SELECT interest_rate/100 from schemes where scheme_id={scheme_id}")
+        interest = float(cursor.fetchone()[0])
+        money = float(i[0])
+        start_date = str(i[2])
+        current_date = str(date.today())
+        a = (int(current_date[0:4]), int(current_date[5:7]), int(current_date[8:])) 
+        b = (int(start_date[0:4]), int(start_date[5:7]), int(start_date[8:]))
+        no_years = find_days(a, b)/365
+        amt = money*((1+(interest/12))**(12*no_years))
+        tot+= amt
+        print(a, b, no_years)
+    return tot
