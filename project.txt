@@ -1,4 +1,5 @@
-use bank
+create database bank;
+use bank;
 
 CREATE TABLE employees(
     employee_id INTEGER AUTO_INCREMENT,
@@ -36,6 +37,8 @@ CREATE TABLE users(
     primary_contact_number CHAR(12) NOT NULL,
     secondary_contact_number CHAR(12),
     credit_score DECIMAL(5, 2),
+    aadhar BIGINT(12) UNIQUE,
+    pan CHAR(10) UNIQUE,
     pin INT(4),
     CONSTRAINT check_gender_usr CHECK(gender='m' OR gender='f' OR gender='M' OR gender='F'),
     CONSTRAINT pk_usr PRIMARY KEY(user_id)
@@ -51,6 +54,14 @@ CREATE TABLE investments(
     CONSTRAINT pk_inv PRIMARY KEY(investment_id),
     CONSTRAINT fk_inv1 FOREIGN KEY(user_id) REFERENCES users(user_id),
     CONSTRAINT fk_inv2 FOREIGN KEY(scheme_id) REFERENCES schemes(scheme_id)
+);
+
+CREATE TABLE repays(
+    repay_id INTEGER AUTO_INCREMENT,
+    investment_id INTEGER NOT NULL,
+    repay_date DATE NOT NULL,
+    CONSTRAINT pkr PRIMARY KEY(repay_id),
+    CONSTRAINT fkr FOREIGN KEY(investment_id) REFERENCES investments(investment_id)
 );
 
 CREATE TABLE transactions(
@@ -69,11 +80,12 @@ CREATE TABLE payments(
     payment_datetime DATETIME NOT NULL,
     payment_amount DECIMAL(12, 2) NOT NULL,
     CONSTRAINT pk_pay PRIMARY KEY(payment_id),
-    CONSTRAINT fk_pay1 FOREIGN KEY(sender_id) REFERENCES users(user_id),
+    CONSTRAINT fk_pay1 FOREIGN KEY(sender_id) REFERENCES users(user_id)
     CONSTRAINT fk_pay2 FOREIGN KEY(reciever_id) REFERENCES users(user_id)
 );
 
 INSERT INTO schemes VALUES(1, 'EasyLoan', 'loan', 'home', 1.23, 3);
 INSERT INTO schemes VALUES(2, 'EasyDeposit', 'deposit', 'SB', 1.23, 5);
+INSERT INTO schemes VALUES(3, 'LongDeposit', 'deposit', 'FD', 1.23, 25);
 INSERT INTO employees VALUES(1, 'ABC', 'bank', '1997-05-29', 'm', 'nowhere', '2003-04-04', 123, 'ADMIN');
-INSERT INTO users VALUES(1, 'chiraag', 'password', '2007-05-29', 'm', 'everywhere', 'chiraagkv@gmail.com', '917975113319', NULL, NULL, 1234);
+INSERT INTO users VALUES(1, 'chiraag', 'password', '2007-05-29', 'm', 'everywhere', 'chiraagkv@gmail.com', '917975113319', NULL, NULL, 123456789012, '1q632t364v',1234);

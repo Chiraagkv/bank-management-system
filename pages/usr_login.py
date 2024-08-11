@@ -14,9 +14,12 @@ st.markdown("# Login")
 email = st.text_input("Email Address", placeholder="your.name@mail.com")
 password = st.text_input("Password", placeholder="password", type="password")
 if st.button("Log-in", type="primary"):
-    if check_user_password(email, password):
-        open("./creds.txt", "w").write(email)
-        switch_page("usr_landing")
+    if email and password:
+        if check_user_password(email, password):
+            open("./creds.txt", "w").write(email)
+            switch_page("usr_landing")
 
+        else:
+            st.write("wrong password or email id")
     else:
-        st.write("wrong password or email id")
+        st.write("Please enter email and password")
