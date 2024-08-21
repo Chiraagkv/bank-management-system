@@ -1,20 +1,6 @@
 create database bank;
 use bank;
 
-CREATE TABLE employees(
-    employee_id INTEGER AUTO_INCREMENT,
-    employee_name VARCHAR(80) NOT NULL,
-    employee_password VARCHAR(30) NOT NULL DEFAULT 'root',
-    birth_date DATE NOT NULL,
-    gender CHAR(2) NOT NULL,
-    address VARCHAR(255)NOT NULL,
-    joining_date DATE NOT NULL,
-    salary DECIMAL(10,2) NOT NULL DEFAULT 0,
-    privileges VARCHAR(10),
-    CONSTRAINT check_gender_emp CHECK(gender='m' OR gender='f' OR gender='M' OR gender='F'),
-    CONSTRAINT pk_emp PRIMARY KEY(employee_id)
-);
-
 CREATE TABLE schemes(
     scheme_id INTEGER AUTO_INCREMENT,
     scheme_name VARCHAR(100) NOT NULL,
@@ -62,15 +48,6 @@ CREATE TABLE repays(
     repay_date DATE NOT NULL,
     CONSTRAINT pkr PRIMARY KEY(repay_id),
     CONSTRAINT fkr FOREIGN KEY(investment_id) REFERENCES investments(investment_id)
-);
-
-CREATE TABLE transactions(
-    transaction_id INTEGER AUTO_INCREMENT,
-    investment_id INTEGER NOT NULL,
-    transaction_datetime DATETIME NOT NULL,
-    transaction_amount DECIMAL(12, 2) NOT NULL,
-    CONSTRAINT pk_tran PRIMARY KEY(transaction_id),
-    CONSTRAINT fk_tran FOREIGN KEY(investment_id) REFERENCES investments(investment_id)
 );
 
 CREATE TABLE payments(
