@@ -162,7 +162,23 @@ elif option == "Make transactions":
                     st.write("Wrong password")
 elif option == "Check Your Plans":
     invs = show_investments(email)
-    st.write(invs)
+    usr_id = invs[1]
+    invs = invs[0] 
+    # st.write(invs)
+    data_dict = {
+        "Investment ID":[i[0] for i in invs],
+        "Scheme ID":[i[1] for i in invs],
+        "Scheme Name":[i[5] for i in invs],
+        "Scheme Type":[i[6] for i in invs],
+        "Scheme Subtype":[i[7] for i in invs],
+        "Interest Rate":[i[8] for i in invs],
+        "Tenure months":[i[9] for i in invs],
+        "Start Date":[i[2] for i in invs],
+        "Amount":[i[3] for i in invs],
+        "Status":[i[4] for i in invs]
+    }
+    df = pd.DataFrame(data_dict)
+    st.dataframe(df)
 elif option == "Pay Your Loans":
     loans = show_all_loans(email)
     l = st.radio("Choose loan to pay back", [i for i in loans])

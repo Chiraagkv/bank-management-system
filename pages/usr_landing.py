@@ -30,8 +30,9 @@ attributes = [
 ]
 for n, i in enumerate(info):
     if i:
-        st.markdown(f"### {attributes[n]}:")
-        st.write(f"\t{i}")
+        st.markdown(f"#### **{attributes[n]}**: \n{i}")
+        # st.divider()
+        # st.write(f"\t{i}")
 
 total_money = find_full_savings(email)
 

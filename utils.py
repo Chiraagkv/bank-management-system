@@ -135,8 +135,10 @@ def change_balance(acc_id, amt):
 def show_investments(email):
     cursor.execute(f"SELECT user_id from users where email = '{email}'")
     usr_id = int(cursor.fetchone()[0])
-    cursor.execute(f"SELECT * from investments where user_id= {usr_id}")
+    cursor.execute(f"SELECT investments.investment_id, investments.scheme_id, investments.start_date, investments.amount, investments.status, schemes.scheme_name,schemes.scheme_type, schemes.scheme_subtype, schemes.interest_rate, schemes.tenure_months from investments JOIN schemes on investments.scheme_id = schemes.scheme_id where user_id= {usr_id}")
     return cursor.fetchall(), usr_id
+
+
 def find_days(d1, d2):
     a = d1[-1] - d2[-1]
     b = d1[1] - d2[1]
@@ -234,5 +236,6 @@ def see_due(inv_id):
     return emi_pay
 
 def log_repay(inv_id):
-    cursor.execute(f"INSERT INTO repays(investment_id, repay_date) values({inv_id}, '{str(date.today()).replace("-", ":")}')")
+    a = str(date.today()).replace("-", ":")
+    cursor.execute(f"INSERT INTO repays(investment_id, repay_date) values({inv_id}, '{a}')")
     connection.commit()
